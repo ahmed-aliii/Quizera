@@ -1,0 +1,56 @@
+﻿@model List<MyAttemptViewModel>
+
+<div class="container py-5">
+    <h2 class="text-primary mb-4"><i class="bi bi-journal-check me-2"></i>My Attempts</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center">
+            <i class="bi bi-info-circle me-2"></i> You haven't taken any exams yet.
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered table-striped shadow-sm">
+            <thead class="table-primary">
+                <tr>
+                    <th>Exam</th>
+                    <th>Score</th>
+                    <th>Total Marks</th>
+                    <th>Started At</th>
+                    <th>Finished At</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var a in Model)
+                {
+                    <tr>
+                        <td>@a.ExamTitle</td>
+                        <td>@a.Score</td>
+                        <td>@a.TotalMarks</td>
+                        <td>@a.StartedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>@(a.FinishedAt?.ToString("yyyy-MM-dd HH:mm") ?? "In Progress")</td>
+                        <td>
+                            @if (a.FinishedAt != null)
+                            {
+                                <span class="badge bg-success">Completed</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning text-dark">In Progress</span>
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Result" asp-route-id="@a.AttemptId"
+                               class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-eye"></i> View
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

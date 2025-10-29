@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container py-5">
+
+    <!-- Header Section -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">Welcome to Quizera</h1>
+        <p class="lead text-muted">Your smart way to create, manage, and take online exams efficiently.</p>
+        <hr class="w-25 mx-auto my-4" />
+    </div>
+
+    <!-- Cards Section -->
+    <div class="row justify-content-center g-4">
+
+        <!-- For Instructors -->
+        @if(User.IsInRole("INSTRUCTOR"))
+        {
+            <div class="col-md-5 col-lg-4">
+                <div class="card h-100 shadow-lg border-0 rounded-4">
+                    <div class="card-body text-center p-4">
+                        <i class="bi bi-journal-text text-primary display-4 mb-3"></i>
+                        <h5 class="card-title fw-bold mb-2">Manage Exams</h5>
+                        <p class="card-text text-muted mb-4">
+                            Create, update, and manage exams with powerful tracking tools.
+                        </p>
+                        <a asp-controller="Exam" asp-action="Index" class="btn btn-outline-primary px-4">
+                            <i class="bi bi-arrow-right-circle"></i> Go to Exams
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5 col-lg-4">
+                <div class="card h-100 shadow-lg border-0 rounded-4">
+                    <div class="card-body text-center p-4">
+                        <i class="bi bi-people text-success display-4 mb-3"></i>
+                        <h5 class="card-title fw-bold mb-2">Student Attempts</h5>
+                        <p class="card-text text-muted mb-4">
+                            Analyze students’ performance and results in detail.
+                        </p>
+                        <a asp-controller="Attempt" asp-action="Index" class="btn btn-outline-success px-4">
+                            <i class="bi bi-graph-up"></i> View Attempts
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- For Students -->
+        @if(User.IsInRole("STUDENT"))
+        {
+        <div class="col-md-5 col-lg-4">
+            <div class="card h-100 shadow-lg border-0 rounded-4">
+                <div class="card-body text-center p-4">
+                    <i class="bi bi-play-circle text-success display-4 mb-3"></i>
+                    <h5 class="card-title fw-bold mb-2">Start Exam</h5>
+                    <p class="card-text text-muted mb-4">
+                        Take available exams and test your knowledge anytime.
+                    </p>
+                    <a asp-controller="Exam" asp-action="Index" class="btn btn-success px-4">
+                        <i class="bi bi-play-fill"></i> Start Exam
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5 col-lg-4">
+            <div class="card h-100 shadow-lg border-0 rounded-4">
+                <div class="card-body text-center p-4">
+                    <i class="bi bi-clipboard-check text-primary display-4 mb-3"></i>
+                    <h5 class="card-title fw-bold mb-2">My Attempts</h5>
+                    <p class="card-text text-muted mb-4">
+                        Review your past exam attempts and track your progress.
+                    </p>
+                    <a asp-controller="Attempt" asp-action="MyAttempts" class="btn btn-outline-primary px-4">
+                        <i class="bi bi-list-check"></i> View My Attempts
+                    </a>
+                </div>
+            </div>
+        </div>
+        }
+
+    </div>
+</div>

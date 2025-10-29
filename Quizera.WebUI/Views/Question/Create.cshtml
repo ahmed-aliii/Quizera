@@ -1,0 +1,73 @@
+﻿@model CreateQuestionVM
+
+@{
+    ViewData["Title"] = "Create Question";
+}
+
+<div class="container py-4">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center rounded-top-4">
+            <h3 class="mb-0"><i class="bi bi-question-circle me-2"></i> Create Question</h3>
+            <a asp-controller="Exam" asp-action="Details" asp-route-id="@Model.ExamId" class="btn btn-light btn-sm rounded-pill">
+                <i class="bi bi-arrow-left"></i> Back to Questions
+            </a>
+        </div>
+
+        <div class="card-body p-4">
+            <form asp-action="Create" method="post">
+                <input type="hidden" asp-for="ExamId" />
+
+                <div class="mb-4">
+                    <label asp-for="Text" class="form-label fw-semibold">Question Text</label>
+                    <input asp-for="Text" class="form-control form-control-lg" placeholder="Enter your question here..." />
+                    <span asp-validation-for="Text" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Marks" class="form-label fw-semibold">Marks</label>
+                    <input asp-for="Marks" class="form-control w-25" type="number" placeholder="e.g. 5" />
+                    <span asp-validation-for="Marks" class="text-danger small"></span>
+                </div>
+
+                <h5 class="fw-bold mb-3"><i class="bi bi-list-check me-2"></i> Options</h5>
+
+                <div class="table-responsive mb-4">
+                    <table class="table align-middle table-hover border rounded">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Option Text</th>
+                                <th class="text-center">Is Correct?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.Options.Count; i++)
+                            {
+                                <tr>
+                                    <td style="min-width: 300px;">
+                                        <input asp-for="@Model.Options[i].Text" class="form-control" placeholder="Enter option text..." />
+                                        <span asp-validation-for="@Model.Options[i].Text" class="text-danger small"></span>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="form-check d-flex justify-content-center">
+                                            <input asp-for="@Model.Options[i].IsCorrect" class="form-check-input" type="checkbox" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success btn-lg rounded-pill px-4 shadow-sm">
+                        <i class="bi bi-save me-2"></i> Save Question
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Access Denied";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+<style>
+    .access-denied-page {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 80vh;
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    }
+
+    .access-card {
+        background: #fff;
+        padding: 3rem 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        text-align: center;
+        max-width: 500px;
+        width: 100%;
+    }
+
+        .access-card i {
+            font-size: 4rem;
+            color: #dc3545;
+        }
+
+        .access-card h2 {
+            font-weight: 700;
+            margin-top: 1rem;
+            color: #343a40;
+        }
+
+        .access-card p {
+            color: #6c757d;
+            margin: 1rem 0 2rem 0;
+        }
+
+    .btn-back {
+        border-radius: 30px;
+        padding: 0.6rem 1.5rem;
+        font-weight: 500;
+    }
+</style>
+
+<div class="access-denied-page">
+    <div class="access-card">
+        <i class="bi bi-shield-lock-fill"></i>
+        <h2>Access Denied</h2>
+        <p>You don’t have permission to view this page.</p>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary btn-back">
+            <i class="bi bi-house-door"></i> Back to Home
+        </a>
+    </div>
+</div>

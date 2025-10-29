@@ -1,0 +1,65 @@
+﻿@model StudentDetailsViewModel
+
+@{
+    ViewData["Title"] = "Student Details";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-primary">@Model.UserName’s Details</h2>
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Back to List
+        </a>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="card-title text-secondary mb-3">Student Information</h5>
+            <dl class="row mb-0">
+                <dt class="col-sm-3">Full Name</dt>
+                <dd class="col-sm-9">@Model.UserName</dd>
+
+                <dt class="col-sm-3">Email</dt>
+                <dd class="col-sm-9">@Model.Email</dd>
+
+                <dt class="col-sm-3">User ID</dt>
+                <dd class="col-sm-9 text-muted">@Model.UserId</dd>
+            </dl>
+        </div>
+    </div>
+
+    <h4 class="text-primary mb-3">Exam Attempts</h4>
+
+    @if (!Model.Attempts.Any())
+    {
+        <div class="alert alert-info text-center shadow-sm p-3">
+            No attempts found for this student.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered align-middle shadow-sm">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col">Exam Title</th>
+                        <th scope="col">Score</th>
+                        <th scope="col">Started At</th>
+                        <th scope="col">Finished At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var attempt in Model.Attempts)
+                    {
+                        <tr>
+                            <td class="fw-semibold">@attempt.ExamTitle</td>
+                            <td>@attempt.Score</td>
+                            <td>@attempt.StartedAt.ToString("g")</td>
+                            <td>@(attempt.FinishedAt?.ToString("g") ?? "In Progress")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

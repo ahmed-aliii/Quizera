@@ -1,0 +1,37 @@
+﻿@model Question
+
+@{
+    ViewData["Title"] = "Question Details";
+}
+
+<div class="container py-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Question Details</h4>
+        </div>
+        <div class="card-body">
+            <h5>@Model.Text</h5>
+            <p><strong>Marks:</strong> @Model.Marks</p>
+            <p><strong>Exam:</strong> @Model.Exam?.Title</p>
+
+            <h6 class="mt-4">Options</h6>
+            <ul class="list-group">
+                @foreach (var opt in Model.Options)
+                {
+                    <li class="list-group-item @(opt.IsCorrect ? "list-group-item-success" : "")">
+                        @opt.Text
+                        @if (opt.IsCorrect)
+                        {
+                            <span class="badge bg-success ms-2">Correct</span>
+                        }
+                    </li>
+                }
+            </ul>
+
+            <div class="mt-4">
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+            </div>
+        </div>
+    </div>
+</div>

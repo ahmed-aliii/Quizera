@@ -1,0 +1,122 @@
+﻿@model SignupVM
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<div class="container d-flex align-items-center justify-content-center min-vh-20">
+    <div class="col-11 col-sm-8 col-md-6 col-lg-6">
+        <div class="card border-0 shadow rounded-4 overflow-hidden">
+
+            <!-- Header -->
+            <div class="card-header bg-primary text-white text-center py-4 border-0">
+                <h4 class="fw-bold mb-1">Create an Account ✨</h4>
+                <p class="mb-0 fw-light">Join us today — it’s fast and easy</p>
+            </div>
+
+            <!-- Body -->
+            <div class="card-body p-4">
+                <form asp-action="SignUp" method="post" novalidate autocomplete="off">
+                    @Html.AntiForgeryToken()
+
+                    <!-- Username -->
+                    <div class="mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0">
+                                <i class="bi bi-person"></i>
+                            </span>
+                            <div class="form-floating flex-grow-1">
+                                <input asp-for="UserName" class="form-control border-start-0" placeholder="Username" />
+                                <label asp-for="UserName" class="text-muted"></label>
+                            </div>
+                        </div>
+                        <span asp-validation-for="UserName" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0">
+                                <i class="bi bi-envelope"></i>
+                            </span>
+                            <div class="form-floating flex-grow-1">
+                                <input asp-for="Email" class="form-control border-start-0" placeholder="name@example.com" autocomplete="email" />
+                                <label asp-for="Email" class="text-muted"></label>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0">
+                                <i class="bi bi-lock"></i>
+                            </span>
+                            <div class="form-floating flex-grow-1">
+                                <input asp-for="Password" class="form-control border-start-0" placeholder="Password" type="password" autocomplete="new-password" />
+                                <label asp-for="Password" class="text-muted"></label>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Password" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0">
+                                <i class="bi bi-shield-lock"></i>
+                            </span>
+                            <div class="form-floating flex-grow-1">
+                                <input asp-for="ConfirmPassword" class="form-control border-start-0" placeholder="Confirm" type="password" autocomplete="new-password" />
+                                <label asp-for="ConfirmPassword" class="text-muted"></label>
+                            </div>
+                        </div>
+                        <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Role -->
+                    <div class="mb-4">
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0">
+                                <i class="bi bi-person-badge"></i>
+                            </span>
+                            <div class="form-floating flex-grow-1">
+                                <select asp-for="Role" class="form-select border-start-0">
+                                    <option value="">-- Select Role --</option>
+                                    <option value="STUDENT">Student</option>
+                                    <option value="INSTRUCTOR">Instructor</option>
+                                </select>
+                                <label asp-for="Role" class="text-muted"></label>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Role" class="text-danger small"></span>
+                    </div>
+
+
+                    <!-- Submit Button -->
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary py-3 fw-bold text-uppercase shadow-sm">
+                            <i class="bi bi-person-plus me-1"></i> Sign Up
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Footer -->
+            <div class="card-footer bg-white text-center py-3 border-0">
+                <span class="text-muted">Already have an account?</span>
+                <a asp-action="Login" asp-controller="Account" class="text-primary text-decoration-none fw-semibold ms-1">
+                    Sign In
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
